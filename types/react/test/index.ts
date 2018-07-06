@@ -797,6 +797,12 @@ declare var x: React.DOMElement<{
     };
 }, Element>;
 
+// Objects are not valid as React Children
+const Foo: React.SFC<SCProps> = () => DOM.div({}, { foo: 1 }); // $ExpectError
+
+// Ensure that render props (functions as children) are supported
+const FunctionFoo: React.SFC<SCProps> = () => DOM.div({}, () => DOM.div({}, ""));
+
 // React 16 should be able to render its children directly
 class RenderChildren extends React.Component {
     render() {
